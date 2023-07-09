@@ -1,6 +1,13 @@
+
+
 const fastify = require('fastify')({
     logger: true
-  }).register(require('./routes/clients'));
+}).register(require('./routes/clients'));
+
+// fastify.register(require('fastify-cors'), {
+//     origin: '*',
+//     methods: ['GET', 'POST', 'PUT', 'DELETE'],
+// });
 
 const start = async () => {
     try {
@@ -11,4 +18,4 @@ const start = async () => {
     }
 }
 
-start();
+start();    
