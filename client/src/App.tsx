@@ -3,15 +3,15 @@ import { useFetch } from "./shared/hooks";
 import { Client, Clients } from "./shared/models";
 
 function App() {
-  const { data, loading, error } = useFetch<Array<Client>>(
-    "http://localhost:4200/clients"
-  );
+  const { data, loading, error } = useFetch<Array<Client>>("http://localhost:4200/clients");
+
+  console.log(data);
 
   return (
     <>
-      {data?.map((client) => (
+      {/* {data??.map((client) => (
         <p>{client.firstName}</p>
-      ))}
+      ))} */}
     </>
   );
 }
