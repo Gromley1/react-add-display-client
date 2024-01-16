@@ -1,12 +1,12 @@
+import { useState } from "react";
 import "./App.scss";
 import { useFetch } from "./shared/hooks";
-import { Client, Clients } from "./shared/models";
+import { Client } from "./shared/models";
 
 function App() {
-    const { data, loading, error } = useFetch<Array<Client>>("http://localhost:4200/clients");
+    const { data: clients, loading, error } = useFetch<Array<Client>>("http://localhost:4200/clients");
 
-
-    const { clients } = data?.data as Clients;
+    if (error) return <p>Error</p>;
 
     if (loading) return <p>Loading...</p>;
 

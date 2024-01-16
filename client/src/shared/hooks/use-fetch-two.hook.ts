@@ -31,7 +31,7 @@ export function useFetch<T>(
         throw new Error("Request failed");
       }
       const json = await response.json();
-      setData(json);
+      setData(json.data);
       setError(null);
     } catch (error) {
       const errorResponse = error as Response;
