@@ -1,5 +1,5 @@
 export interface ApiResponse<T> {
-  data: T | null;
+  data: T;
   error: Error;
   loading: boolean;
 }
