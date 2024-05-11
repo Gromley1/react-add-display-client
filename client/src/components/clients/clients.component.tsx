@@ -5,8 +5,6 @@ import { Client } from "../../shared/models";
 
 export const Clients = (): ReactElement => {
     const { data, error, isLoading } = useGetClientsQuery();
-    console.log('data: ', data);
-
 
     if (error) return <p>Error</p>;
     if (isLoading) return <p>Loading...</p>;

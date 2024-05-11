@@ -1,16 +1,26 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { ApiResponse, Client } from "../../shared/models";
+import { Client } from "../../shared/models";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../../App";
 
-export const ClientsApi = createApi({
-  reducerPath: "api",
-  baseQuery: fetchBaseQuery({ baseUrl: "http://localhost:4200/" }),
+export const firebaseApi = createApi({
+  reducerPath: "firebaseApi",
+  baseQuery: fetchBaseQuery({ baseUrl: "/" }),
   endpoints: (builder) => ({
-    getClients: builder.query<Array<Client>, void>({
-      query: () => "/clients",
-      transformResponse: (response: ApiResponse<Array<Client>>) =>
-        response.data,
+    getClients: builder.query<Client[], void>({
+      queryFn: async () => {
+        try {
+          const querySnapshot = await getDocs(collection(db, "clients"));
+          const clients: Array<Client> = querySnapshot.docs.map((doc) => ({
+            ...(doc.data() as Client),
+          }));
+          return { data: clients };
+        } catch (error) {
+          return { error: { status: "CUSTOM_ERROR", error: "" } };
+        }
+      },
     }),
   }),
 });
 
-export const { useGetClientsQuery } = ClientsApi;
+export const { useGetClientsQuery } = firebaseApi;

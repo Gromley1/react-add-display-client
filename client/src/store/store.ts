@@ -1,13 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
-import { ClientsApi } from "./api";
+import { firebaseApi } from "./api";
 import { setupListeners } from "@reduxjs/toolkit/query";
 
 export const store = configureStore({
   reducer: {
-    [ClientsApi.reducerPath]: ClientsApi.reducer,
+    [firebaseApi.reducerPath]: firebaseApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware().concat(ClientsApi.middleware),
+    getDefaultMiddleware().concat(firebaseApi.middleware),
 });
 
 setupListeners(store.dispatch);
